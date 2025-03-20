@@ -29,13 +29,17 @@
 
 ---
 
-## ⚡ Features
+## ⚡ Features  
 
-🌳 **Structured Web-Tree Generation** - Easily visualize website structure  
-🕵️ **Regex-Based Data Extraction** - Extract key information efficiently  
-⚡ **High-Speed Multi-threading** - Optimized for performance  
-📂 **Multiple Export Formats** - Save results in JSON, XML, or TXT  
-🎨 **Colorized Output & Robust Error Handling** - Enhanced readability
+- 🌳 **Structured Web-Tree Generation**  
+
+- 🕵️ **Regex-Based Data Extraction**  
+
+- ⚡ **High-Speed Multi-threading**  
+
+- 📂 **Multiple Export Formats**  
+
+- 🎨 **Colorized Output & Robust Error Handling**  
 
 ---
 
