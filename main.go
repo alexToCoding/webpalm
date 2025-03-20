@@ -1,6 +1,6 @@
 package main
 
-import "github.com/Malwarize/webpalm/v2/cmd"
+import "github.com/XORbit01/webpalm/cmd"
 
 func main() {
 	cmd.Execute()

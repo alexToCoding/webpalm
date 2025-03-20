@@ -5,9 +5,9 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/Malwarize/webpalm/v2/core"
-	"github.com/Malwarize/webpalm/v2/shared"
-	"github.com/Malwarize/webpalm/v2/webtree"
+	"github.com/XORbit01/webpalm/core"
+	"github.com/XORbit01/webpalm/shared"
+	"github.com/XORbit01/webpalm/webtree"
 )
 
 func TestCache_AddAndIsVisited(t *testing.T) {

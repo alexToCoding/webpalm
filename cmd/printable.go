@@ -53,7 +53,7 @@ body pages using regular expressions.`)
 
 func banner() string {
 	version := color.MagentaString(Version)
-	author := color.MagentaString("github.com/Malwarize")
+	author := color.MagentaString("github.com/XORbit01")
 	discord := color.MagentaString("https://discord.gg/ccBJZU99wT")
 
 	banner := `

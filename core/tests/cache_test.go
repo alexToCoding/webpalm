@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/Malwarize/webpalm/v2/core"
+	"github.com/XORbit01/webpalm/core"
 )
 
 func TestCache(t *testing.T) {

@@ -6,8 +6,8 @@ import (
 
 	"github.com/fatih/color"
 
-	"github.com/Malwarize/webpalm/v2/core"
-	"github.com/Malwarize/webpalm/v2/shared"
+	"github.com/XORbit01/webpalm/core"
+	"github.com/XORbit01/webpalm/shared"
 	"github.com/spf13/cobra"
 )
 
