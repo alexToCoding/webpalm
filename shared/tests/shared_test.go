@@ -5,7 +5,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/XORbit01/webpalm/shared"
+	"github.com/XORbit01/webpalm/v2/shared"
 )
 
 func TestIsValidDomain(t *testing.T) {
