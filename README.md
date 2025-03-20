@@ -1,134 +1,123 @@
-# WebPalm
+<div align="center">
 
-![banner](https://user-images.githubusercontent.com/130087473/235356807-32b80288-7808-4f66-a6f2-fcbe7ab34b72.png)
+<img src="https://user-images.githubusercontent.com/130087473/235356807-32b80288-7808-4f66-a6f2-fcbe7ab34b72.png" alt="WebPalm Banner" width="600">
 
-<hr>
-<br></br>
-<br></br>
+<h2> 🌐 Advanced Web Traversal & Data Extraction 🚀 </h2>
 
-# Take a look 
-![takealook-min](https://github.com/Malwarize/webpalm/assets/130087473/6c601672-f278-431d-854b-0a9876a2fafd)
+[![GitHub release](https://img.shields.io/github/v/release/XORbit01/webpalm?color=blue&label=release)]()
+[![GitHub license](https://img.shields.io/github/license/XORbit01/webpalm?color=green)]()
+[![GitHub issues](https://img.shields.io/github/issues/XORbit01/webpalm?color=red)]()
+[![GitHub stars](https://img.shields.io/github/stars/XORbit01/webpalm?color=yellow)]()
+[![GitHub forks](https://img.shields.io/github/forks/XORbit01/webpalm?color=orange)]()
+[![GitHub watchers](https://img.shields.io/github/watchers/XORbit01/webpalm?color=blue)]()
 
-## What is webpalm?
-WebPalm is a command-line tool that enables users to traverse a website and generate a tree of all its webpages and their links. It uses a recursive approach to enter each link found on a webpage and continues to do so until all levels have been explored.
-In addition to generating a site map, WebPalm can extract data from the body of each page using regular expressions and save the results in a file. This feature can be useful for web scraping or extracting specific information.
+🔍 **Crawl websites efficiently, extract structured data, and visualize connections.** 🕵️‍♂️
 
-### ⚠️ DISCLAIMER ⚠️:
-this tool is intended to be used for legal purposes only,
-and you are responsible for your actions.
+<img src="https://github.com/XORbit01/webpalm/assets/130087473/6c601672-f278-431d-854b-0a9876a2fafd" alt="WebPalm Preview" width="600">
 
-### Features
-- [x] Generate a palm tree struct of web urls
-- [x] Dump data from body pages using regular expressions
-- [x] Multi-threading and parallelism
-- [x] Export the web-tree to json, xml, txt
-- [x] Fast and easy to use
-- [x] Colorized output and error handling
+</div>
 
-### Installation
-#### From source
-```bash
+---
+
+## 🗺️ Table of Contents
+- [`📦 Installation`](#-installation)
+- [`⚡ Features`](#-features)
+- [`🚀 Usage`](#-usage)
+- [`📌 Examples`](#-examples)
+- [`📜 Regex Patterns`](#-regex-patterns)
+- [`🤝 Contributing`](#-contributing)
+
+---
+
+## ⚡ Features
+
+🌳 **Structured Web-Tree Generation** - Easily visualize website structure  
+🕵️ **Regex-Based Data Extraction** - Extract key information efficiently  
+⚡ **High-Speed Multi-threading** - Optimized for performance  
+📂 **Multiple Export Formats** - Save results in JSON, XML, or TXT  
+🎨 **Colorized Output & Robust Error Handling** - Enhanced readability
+
+---
+
+## 📦 Installation
+
+### 📥 Download Binary
+
+### 📥 Compile from Source
+```sh
 git clone https://github.com/XORbit01/webpalm.git
 cd webpalm
 go build -o webpalm && ./webpalm
+```  
+👉 [Download Latest Release](https://github.com/XORbit01/webpalm/releases/latest)
+
+### 📥 Install via Go
+```sh
+go install github.com/XORbit01/webpalm/v2@latest
 ```
-#### From binary
-you can download the binary from
-[Releases](https://github.com/Malwarize/webpalm/releases/latest)
-```bash
-wget https://github.com/Malwarize/webpalm/releases/download/v0.0.1/webpalm_x.x.x_os_arch.tar.gz
-tar -xvf webpalm_x.x.x_os_arch.tar.gz
-cd webpalm
-./webpalm
-```
-### if you have go installed
-```bash
-go install github.com/Malwarize/webpalm/v2@latest
-```
-### Usage
-```bash
+
+---
+
+## 🚀 Usage
+
+```sh
 webpalm -h
 ```
-```
-Flags:
-  -d, --delay int                delay (ms) between each request / ex: -d 200
-  -x, --exclude-code ints        status codes to exclude / ex : -x 404,500
-  -h, --help                     help for webpalm
-  -i, --include strings          include only domains / ex : -i google.com,facebook.com
-  -l, --level int                level of palming / ex: -l2
-  -o, --output string            file to export the result (f.json, f.xml, f.txt) / ex: -o result.json
-  -p, --proxy string             proxy to use / ex: -p http://proxy.com:8080
-      --regexes stringToString   regexes to match in each page / ex: --regexes comments="\<\!--.*?-->" (default [])
-  -t, --timeout int              timeout in seconds / ex: -t 10 (default 10)
-  -u, --url string               target url / ex: -u https://google.com
-  -a, --user-agent string        user agent to use / ex: -a chrome, firefox, safari, ie, edge, opera, android, ios, custom
-  -v, --version                  version for webpalm
-  -w, --worker int               number of workers for multi-threading  / ex: -w 10
-```
-### Examples
 
-#### get the palm tree of a website: 
-```bash
-webpalm -u https://google.com -l1
-# or
-webpalm -u https://google.com -l1 -w 3 # 3 workers (multi-threading)
+### ⚙️ Common Flags
+```yaml
+🌎 -i, --include     # Include only specific domains (e.g., google.com, facebook.com)
+🔗 -u, --url         # Target website  
+📏 -l, --level       # Depth of traversal  
+❌ -x, --exclude     # Exclude status codes (e.g., 404, 500)  
+💾 -o, --output      # Save results (JSON, XML, TXT)  
+🚀 -w, --worker      # Multi-threading workers  
+🔍 --regexes         # Extract data using regex  
 ```
 
-#### get palm tree of a website and exclude some status codes: 
-```bash
-webpalm -u https://google.com -l1 -x 404,500 
+---
 
-```
-#### get the palm tree of a website and dump data from the body of the pages: 
-```bash
-webpalm -u https://google.com -l1 --regexes comments="\<\!--.*?-->" -o result.json
-```
+## 📌 Examples
 
-this  will dump the comments of each page in the body of the page
-```bash
-webpalm -u https://google.com -l1 --regexes comments="\<\!--.*?-->",emails="([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+.[a-zA-Z0-9-.]+)"
-```
-this will dump the comments and emails of each page in the body of the page
-
-#### get the palm tree of a website and export it to xml,txt: 
-```bash
-webpalm -u https://google.com -l3 -o result.xml
-```
-```bash
-webpalm -u https://google.com -l2 -o result.txt
+### 🌲 Generate a Website Map
+```sh
+webpalm -u https://example.com -l2
 ```
 
-#### get the palm tree of a website and include only some domains: 
-```bash
-webpalm -u https://google.com -l2 -i google.com,facebook.com
-```
-this will crawl only the urls that contains google.com or facebook.com
-
-### threading and concurrency
-####  get the palm tree of a website using 100 workers:
-```bash
-webpalm -u https://google.com -l2 -w 100
+### 💬 Extract Comments from Pages
+```sh
+webpalm -u https://example.com -l1 --regexes comments="\<\!--.*?-->" -o results.json
 ```
 
+### 🚀 Crawl with Multi-threading
+```sh
+webpalm -u https://example.com -l3 -w 50
+```
 
-## Regexes Examples
-| Regex | Pattern                             |
-|-------|-------------------------------------|
-|emails | ([a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+) |
-|comments | \\<\\!--.*?-->                      |
-|tokens | [a-zA-Z0-9]{32}                     |
-|password| \bpassword\b.{0,10}                                    |
+### 💾 Export Results
+```sh
+webpalm -u https://example.com -l2 -o output.xml
+```
 
-Don't forget escaping the regexes if needed
+---
 
-## Tests
-You can run unit tests to gain more confidence in the enhancements or changes to the code by running `go test -v ./...`
+## 📜 Regex Patterns
 
-## Contributing
-Pull requests are welcome. For major changes, please open an issue first to discuss what you would like to change.
-you can also contact me on discord:`xorbit.`
+| 🔍 Purpose   | 📜 Regex Pattern |
+|-----------|--------------|
+| 📧 Emails    | `[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+` |
+| 💬 Comments  | `\<\!--.*?-->` |
+| 🔑 Tokens    | `[a-zA-Z0-9]{32}` |
+| 🔐 Passwords | `\bpassword\b.{0,10}` |
 
+📌 *Escape special characters if needed.*
 
-## Powered By Malwarize
-[Join to Discord](https://discord.gg/ccBJZU99wT)
+---
+
+## 🤝 Contributing
+💡 Pull requests are welcome! Open an issue before major changes.  
+📢 **Discord:** `xorbit.`
+
+---
+
 
