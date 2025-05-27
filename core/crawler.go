@@ -26,10 +26,10 @@ var (
 )
 
 var UnreadableExtensions = []string{
-	".png",
-	".jpg",
-	".jpeg",
-	".gif",
+	//".png",
+	//".jpg",
+	//".jpeg",
+	//".gif",
 	".pdf",
 	".doc",
 	".docx",
@@ -49,8 +49,8 @@ var UnreadableExtensions = []string{
 	".wmv",
 	".flv",
 	".wav",
-	".mpeg",
-	".mpg",
+	//".mpeg",
+	//".mpg",
 	".m4v",
 	".swf",
 	".svg",
