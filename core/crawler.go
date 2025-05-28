@@ -16,8 +16,8 @@ import (
 	"github.com/briandowns/spinner"
 	"github.com/fatih/color"
 
-	"github.com/XORbit01/webpalm/v2/shared"
-	"github.com/XORbit01/webpalm/v2/webtree"
+	"github.com/alexToCoding/webpalm/v2/shared"
+	"github.com/alexToCoding/webpalm/v2/webtree"
 )
 
 var (

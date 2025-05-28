@@ -7,7 +7,7 @@ import (
 
 	"github.com/stretchr/testify/assert"
 
-	"github.com/XORbit01/webpalm/v2/webtree"
+	"github.com/alexToCoding/webpalm/v2/webtree"
 )
 
 func TestNewNode(t *testing.T) {
