@@ -22,7 +22,7 @@ import (
 
 var (
 	GeneralRegex = `((?:https?)://[\w\-]+(?:\.[\w\-]+)+[\w\-\.,@?^=%&:/~\+#]*[\w\-\@?^=%&/~\+#])`
-	HrefRegex    = `href=["']([^"']+)["']`
+	HrefRegex    = `(href|src)=["']([^"']+)["']`
 )
 
 var UnreadableExtensions = []string{
@@ -172,6 +172,15 @@ func (c *Crawler) ExtractLinks(page *webtree.Page) (links []string) {
 				continue
 			}
 			links = append(links, u)
+			continue
+		}
+		if strings.HasPrefix(match[1], "src") || strings.HasPrefix(match[1], "href") {
+			u1, err1 := page.ConvertToAbsoluteURL(match[2])
+			if err1 != nil {
+				continue
+			}
+			links = append(links, u1)
+			continue
 		}
 	}
 	return

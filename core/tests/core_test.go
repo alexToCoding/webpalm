@@ -26,7 +26,7 @@ func TestCache_AddAndIsVisited(t *testing.T) {
 
 func TestCrawler(t *testing.T) {
 	options := &shared.Options{
-		URL:             "http://example.com",
+		URL:             "http://www.zhwanzhou.com.cn",
 		Level:           2,
 		ExportFile:      "",
 		RegexMap:        map[string]string{},
@@ -41,7 +41,7 @@ func TestCrawler(t *testing.T) {
 	c := core.NewCrawler(options)
 
 	page := webtree.NewPage()
-	page.SetUrl("http://example.com")
+	page.SetUrl("http://www.zhwanzhou.com.cn")
 	c.Fetch(page)
 	links := c.ExtractLinks(page)
 	assert.NotEmpty(t, links, "ExtractLinks should return a non-empty list of links")
