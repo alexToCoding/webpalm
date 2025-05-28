@@ -1,4 +1,4 @@
-module github.com/XORbit01/webpalm/v2
+module github.com/alexToCoding/webpalm/v2
 
 go 1.20
 
