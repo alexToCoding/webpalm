@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"io"
 	"net/http"
+	"net/url"
 	"os"
 	"os/signal"
 	"regexp"
@@ -18,6 +19,7 @@ import (
 
 	"github.com/alexToCoding/webpalm/v2/shared"
 	"github.com/alexToCoding/webpalm/v2/webtree"
+	"golang.org/x/net/publicsuffix"
 )
 
 var (
@@ -31,6 +33,8 @@ var UnreadableExtensions = []string{
 	//".jpeg",
 	//".gif",
 	".pdf",
+	".js",
+	".css",
 	".doc",
 	".docx",
 	".xls",
@@ -152,15 +156,54 @@ func (c *Crawler) Fetch(page *webtree.Page) {
 func (c *Crawler) ExtractLinks(page *webtree.Page) (links []string) {
 	regex := regexp.MustCompile(GeneralRegex)
 	generalUrlMatches := regex.FindAllString(page.GetData(), -1)
-	links = append(links, generalUrlMatches...)
+	parsedURL, err := url.Parse(page.GetUrl())
+	if err != nil {
+		panic(err)
+	}
+
+	host := parsedURL.Hostname()
+	etldPlusOne, err := publicsuffix.EffectiveTLDPlusOne(host)
+	if err != nil {
+		panic(err)
+	}
+
+	// Check if the link belongs to the same domain
+	matchedDomainLinks := make([]string, 0)
+	for _, link := range generalUrlMatches {
+		parsedLink, err := url.Parse(link)
+		if err != nil {
+			continue
+		}
+		linkHost := parsedLink.Hostname()
+		linkEtlDPlusOne, err := publicsuffix.EffectiveTLDPlusOne(linkHost)
+		if err != nil {
+			continue
+		}
+		if linkEtlDPlusOne == etldPlusOne && c.IsSkipableUrl(link) == false {
+			matchedDomainLinks = append(matchedDomainLinks, link)
+		}
+	}
+	links = append(links, matchedDomainLinks...)
+
 	hrefRegex := regexp.MustCompile(HrefRegex)
 	hrefMatches := hrefRegex.FindAllStringSubmatch(page.GetData(), -1)
 	for _, match := range hrefMatches {
 		// check if it is a normal url
 		if strings.HasPrefix(match[1], "http") ||
-			strings.HasPrefix(match[1], "https") ||
-			strings.HasPrefix(match[1], "file") {
-			links = append(links, match[1])
+			strings.HasPrefix(match[1], "https") {
+			parsedLink, err := url.Parse(match[1])
+			if err != nil {
+				continue
+			}
+			linkHost := parsedLink.Hostname()
+			linkEtlDPlusOne, err := publicsuffix.EffectiveTLDPlusOne(linkHost)
+			if err != nil {
+				continue
+			}
+			if linkEtlDPlusOne == etldPlusOne && c.IsSkipableUrl(match[1]) == false {
+				links = append(links, match[1])
+			}
+
 			continue
 		}
 		// check if it is a relative url
@@ -171,16 +214,37 @@ func (c *Crawler) ExtractLinks(page *webtree.Page) (links []string) {
 			if err != nil {
 				continue
 			}
-			links = append(links, u)
+			if c.IsSkipableUrl(u) == false {
+				links = append(links, u)
+			}
 			continue
 		}
 		if strings.HasPrefix(match[1], "src") || strings.HasPrefix(match[1], "href") {
-			u1, err1 := page.ConvertToAbsoluteURL(match[2])
-			if err1 != nil {
+			if strings.HasPrefix(match[2], "http") ||
+				strings.HasPrefix(match[2], "https") {
+				parsedLink, err := url.Parse(match[2])
+				if err != nil {
+					continue
+				}
+				linkHost := parsedLink.Hostname()
+				linkEtlDPlusOne, err := publicsuffix.EffectiveTLDPlusOne(linkHost)
+				if err != nil {
+					continue
+				}
+				if linkEtlDPlusOne == etldPlusOne && c.IsSkipableUrl(match[1]) == false {
+					links = append(links, match[2])
+				}
+				continue
+			} else {
+				u, err := page.ConvertToAbsoluteURL(match[2])
+				if err != nil {
+					continue
+				}
+				if c.IsSkipableUrl(u) == false {
+					links = append(links, u)
+				}
 				continue
 			}
-			links = append(links, u1)
-			continue
 		}
 	}
 	return
